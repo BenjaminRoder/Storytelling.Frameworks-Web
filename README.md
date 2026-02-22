@@ -1,6 +1,14 @@
 # Storytelling.Frameworks-Web
-Storytelling Frameworks guide — built specifically for an intermediate fiction writer.
-**What's inside:**
+## Project Details
+
+* Single-page HTML file
+* Embedded CSS (no external stylesheet required)
+* Vanilla JavaScript for framework navigation and interactive step expansion
+* Google Fonts integration
+* No frameworks, no Node.js, no build process required.
+* Storytelling Frameworks guide — built specifically for an intermediate fiction writer.
+
+## What's inside:
 Six frameworks, each with a navigation tab at the top:
 
 * Hero's Journey — the universal myth cycle (Campbell)
