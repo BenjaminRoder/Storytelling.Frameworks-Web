@@ -1,0 +1,1044 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Storytelling Frameworks for Fiction Writers</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Crimson+Pro:ital,wght@0,300;0,400;1,300&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #1a1210;
+    --parchment: #f5efe6;
+    --cream: #faf7f2;
+    --rust: #9b3a1e;
+    --gold: #c9902a;
+    --muted: #8a7a6e;
+    --border: #d4c4b0;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--cream);
+    color: var(--ink);
+    font-family: 'Crimson Pro', Georgia, serif;
+    font-size: 18px;
+    line-height: 1.7;
+    min-height: 100vh;
+  }
+
+  /* Noise texture overlay */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 0;
+    opacity: 0.5;
+  }
+
+  header {
+    padding: 60px 40px 40px;
+    text-align: center;
+    border-bottom: 1px solid var(--border);
+    position: relative;
+  }
+
+  header::after {
+    content: '✦ ✦ ✦';
+    display: block;
+    color: var(--gold);
+    font-size: 12px;
+    letter-spacing: 8px;
+    margin-top: 16px;
+  }
+
+  .eyebrow {
+    font-family: 'Crimson Pro', serif;
+    font-size: 11px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: var(--rust);
+    margin-bottom: 12px;
+    font-weight: 300;
+  }
+
+  h1 {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: clamp(2.2rem, 5vw, 3.8rem);
+    font-weight: 400;
+    line-height: 1.15;
+    color: var(--ink);
+  }
+
+  h1 em {
+    font-style: italic;
+    color: var(--rust);
+  }
+
+  .subtitle {
+    color: var(--muted);
+    font-size: 1.1rem;
+    font-style: italic;
+    margin-top: 12px;
+  }
+
+  /* Nav pills */
+  .nav {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: center;
+    padding: 28px 40px;
+    border-bottom: 1px solid var(--border);
+    background: var(--parchment);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+
+  .nav-btn {
+    background: none;
+    border: 1px solid var(--border);
+    padding: 6px 18px;
+    font-family: 'Crimson Pro', serif;
+    font-size: 0.95rem;
+    color: var(--muted);
+    cursor: pointer;
+    border-radius: 20px;
+    transition: all 0.25s;
+    letter-spacing: 0.5px;
+  }
+
+  .nav-btn:hover, .nav-btn.active {
+    background: var(--rust);
+    border-color: var(--rust);
+    color: white;
+  }
+
+  /* Main layout */
+  .container {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 50px 30px 80px;
+    position: relative;
+    z-index: 1;
+  }
+
+  /* Framework card */
+  .framework {
+    display: none;
+    animation: fadeUp 0.4s ease forwards;
+  }
+
+  .framework.visible { display: block; }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(16px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .framework-header {
+    display: flex;
+    align-items: flex-start;
+    gap: 24px;
+    margin-bottom: 36px;
+    padding-bottom: 28px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .framework-number {
+    font-family: 'Playfair Display', serif;
+    font-size: 4rem;
+    color: var(--border);
+    line-height: 1;
+    flex-shrink: 0;
+    margin-top: -8px;
+  }
+
+  .framework-title { font-family: 'Playfair Display', serif; font-size: 2rem; font-weight: 400; }
+  .framework-subtitle { color: var(--rust); font-style: italic; margin-top: 4px; }
+  .framework-origin { color: var(--muted); font-size: 0.9rem; margin-top: 8px; letter-spacing: 0.3px; }
+
+  /* Steps / Structure */
+  .structure {
+    background: var(--parchment);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 30px;
+    margin-bottom: 32px;
+    position: relative;
+  }
+
+  .structure h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.1rem;
+    font-weight: 400;
+    color: var(--muted);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    font-size: 11px;
+    margin-bottom: 20px;
+  }
+
+  .steps {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
+
+  .step {
+    display: flex;
+    gap: 16px;
+    padding: 14px 0;
+    border-bottom: 1px solid var(--border);
+    cursor: pointer;
+    transition: background 0.2s;
+    border-radius: 4px;
+    padding: 14px 10px;
+  }
+
+  .step:last-child { border-bottom: none; }
+  .step:hover { background: rgba(155,58,30,0.04); }
+
+  .step-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.5rem;
+    color: var(--gold);
+    min-width: 36px;
+    line-height: 1;
+    padding-top: 2px;
+  }
+
+  .step-label {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.05rem;
+    color: var(--ink);
+    font-weight: 700;
+  }
+
+  .step-desc {
+    font-size: 0.95rem;
+    color: var(--muted);
+    margin-top: 2px;
+    line-height: 1.5;
+  }
+
+  .step-example {
+    display: none;
+    font-style: italic;
+    color: var(--rust);
+    font-size: 0.9rem;
+    margin-top: 8px;
+    padding: 8px 12px;
+    background: rgba(201,144,42,0.07);
+    border-left: 2px solid var(--gold);
+    border-radius: 2px;
+  }
+
+  .step.expanded .step-example { display: block; }
+  .step.expanded { background: rgba(155,58,30,0.04); }
+
+  /* Diagram strip */
+  .diagram {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin-bottom: 32px;
+    padding: 20px 24px;
+    background: var(--ink);
+    border-radius: 4px;
+    overflow: hidden;
+  }
+
+  .diagram-node {
+    background: transparent;
+    border: 1px solid rgba(255,255,255,0.2);
+    color: rgba(255,255,255,0.8);
+    padding: 6px 14px;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    letter-spacing: 0.5px;
+    font-family: 'Crimson Pro', serif;
+    white-space: nowrap;
+  }
+
+  .diagram-arrow {
+    color: var(--gold);
+    font-size: 1rem;
+    opacity: 0.7;
+  }
+
+  /* When to use / pitfalls */
+  .two-col {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    margin-bottom: 32px;
+  }
+
+  @media (max-width: 600px) { .two-col { grid-template-columns: 1fr; } }
+
+  .box {
+    padding: 22px;
+    border: 1px solid var(--border);
+    border-radius: 4px;
+  }
+
+  .box h4 {
+    font-family: 'Playfair Display', serif;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin-bottom: 12px;
+    color: var(--muted);
+    font-weight: 400;
+  }
+
+  .box.green { border-color: rgba(60,120,60,0.3); background: rgba(60,120,60,0.04); }
+  .box.red { border-color: rgba(155,58,30,0.3); background: rgba(155,58,30,0.04); }
+
+  .box ul { list-style: none; padding: 0; }
+  .box ul li { font-size: 0.95rem; padding: 4px 0; color: var(--ink); }
+  .box.green ul li::before { content: '✓ '; color: #5a9a5a; }
+  .box.red ul li::before { content: '✗ '; color: var(--rust); }
+
+  /* Prompt section */
+  .prompt-section {
+    border-top: 1px solid var(--border);
+    padding-top: 28px;
+    margin-top: 4px;
+  }
+
+  .prompt-section h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.05rem;
+    font-weight: 400;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-size: 11px;
+    margin-bottom: 16px;
+  }
+
+  .prompt-card {
+    background: var(--parchment);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 20px 24px;
+    font-style: italic;
+    color: var(--ink);
+    font-size: 1rem;
+    line-height: 1.8;
+    margin-bottom: 12px;
+    position: relative;
+  }
+
+  .prompt-card::before {
+    content: '"';
+    font-family: 'Playfair Display', serif;
+    font-size: 4rem;
+    color: var(--gold);
+    opacity: 0.3;
+    position: absolute;
+    top: -10px;
+    left: 12px;
+    line-height: 1;
+  }
+
+  /* Footer note */
+  .note {
+    text-align: center;
+    color: var(--muted);
+    font-size: 0.85rem;
+    font-style: italic;
+    margin-top: 40px;
+    padding-top: 28px;
+    border-top: 1px solid var(--border);
+  }
+
+</style>
+</head>
+<body>
+
+<header>
+  <p class="eyebrow">Fiction Writer's Reference</p>
+  <h1>The Art of <em>Story Structure</em></h1>
+  <p class="subtitle">Six essential frameworks — click any step to reveal an example</p>
+</header>
+
+<nav class="nav">
+  <button class="nav-btn active" onclick="show(0, this)">Hero's Journey</button>
+  <button class="nav-btn" onclick="show(1, this)">Save the Cat</button>
+  <button class="nav-btn" onclick="show(2, this)">Story Circle</button>
+  <button class="nav-btn" onclick="show(3, this)">Three-Act</button>
+  <button class="nav-btn" onclick="show(4, this)">Fichtean Curve</button>
+  <button class="nav-btn" onclick="show(5, this)">In Medias Res</button>
+</nav>
+
+<div class="container">
+
+  <!-- 1. HERO'S JOURNEY -->
+  <div class="framework visible" id="f0">
+    <div class="framework-header">
+      <div class="framework-number">01</div>
+      <div>
+        <div class="framework-title">The Hero's Journey</div>
+        <div class="framework-subtitle">The universal myth cycle</div>
+        <div class="framework-origin">Codified by Joseph Campbell · Used in: Epic fantasy, coming-of-age, adventure</div>
+      </div>
+    </div>
+
+    <div class="diagram">
+      <div class="diagram-node">Ordinary World</div><div class="diagram-arrow">→</div>
+      <div class="diagram-node">Call to Adventure</div><div class="diagram-arrow">→</div>
+      <div class="diagram-node">Threshold</div><div class="diagram-arrow">→</div>
+      <div class="diagram-node">Trials</div><div class="diagram-arrow">→</div>
+      <div class="diagram-node">Ordeal</div><div class="diagram-arrow">→</div>
+      <div class="diagram-node">Reward</div><div class="diagram-arrow">→</div>
+      <div class="diagram-node">Return</div>
+    </div>
+
+    <div class="structure">
+      <h3>Click any stage to see it in action</h3>
+      <div class="steps">
+        <div class="step" onclick="toggle(this)">
+          <div class="step-num">I</div>
+          <div>
+            <div class="step-label">Ordinary World</div>
+            <div class="step-desc">Establish the hero's normal life — their wound, desire, and the limits of their world.</div>
+            <div class="step-example">Frodo lives contentedly in the Shire. His desire for adventure is small; his world is bounded by familiar hills.</div>
+          </div>
+        </div>
+        <div class="step" onclick="toggle(this)">
+          <div class="step-num">II</div>
+          <div>
+            <div class="step-label">Call to Adventure</div>
+            <div class="step-desc">Something disrupts the status quo. The hero is presented with a challenge or quest.</div>
+            <div class="step-example">Gandalf arrives bearing news of the Ring. The outside world intrudes and cannot be ignored.</div>
+          </div>
+        </div>
+        <div class="step" onclick="toggle(this)">
+          <div class="step-num">III</div>
+          <div>
+            <div class="step-label">Refusal & Mentor</div>
+            <div class="step-desc">The hero hesitates. A mentor figure provides tools, wisdom, or courage to proceed.</div>
+            <div class="step-example">Frodo is reluctant; Gandalf's guidance — and Bilbo's example — give him the push he needs.</div>
+          </div>
+        </div>
+        <div class="step" onclick="toggle(this)">
+          <div class="step-num">IV</div>
+          <div>
+            <div class="step-label">Crossing the Threshold</div>
+            <div class="step-desc">The hero commits. They leave the ordinary world behind — there is no easy return.</div>
+            <div class="step-example">The Fellowship leaves Rivendell. The familiar world is gone; the adventure is real.</div>
+          </div>
+        </div>
+        <div class="step" onclick="toggle(this)">
+          <div class="step-num">V</div>
+          <div>
+            <div class="step-label">Tests, Allies, Enemies</div>
+            <div class="step-desc">The hero is tested. They form bonds and face opposition that reveals character.</div>
+            <div class="step-example">The Fellowship encounters Moria, Lothlorien, betrayal — each test strips away illusion.</div>
+          </div>
+        </div>
+        <div class="step" onclick="toggle(this)">
+          <div class="step-num">VI</div>
+          <div>
+            <div class="step-label">The Ordeal</div>
+            <div class="step-desc">The darkest moment. The hero faces death — literal or symbolic — and must transform.</div>
+            <div class="step-example">Frodo must walk alone into Mordor. Everything he trusted has been stripped away.</div>
+          </div>
+        </div>
+        <div class="step" onclick="toggle(this)">
+          <div class="step-num">VII</div>
+          <div>
+            <div class="step-label">Reward & Road Back</div>
+            <div class="step-desc">The hero seizes their prize and begins the journey home — but the danger isn't over.</div>
+            <div class="step-example">The Ring is destroyed. But the Shire will need healing, and Frodo has changed forever.</div>
+          </div>
+        </div>
+        <div class="step" onclick="toggle(this)">
+          <div class="step-num">VIII</div>
+          <div>
+            <div class="step-label">Return with Elixir</div>
+            <div class="step-desc">The hero returns transformed, bringing something of value back to their world.</div>
+            <div class="step-example">Frodo brings peace to the Shire — but carries a wound that only the Undying Lands can heal.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="two-col">
+      <div class="box green">
+        <h4>Best For</h4>
+        <ul>
+          <li>Epic and mythic narratives</li>
+          <li>Character transformation arcs</li>
+          <li>Fantasy, sci-fi, adventure</li>
+          <li>Long-form novels or series</li>
+        </ul>
+      </div>
+      <div class="box red">
+        <h4>Watch Out For</h4>
+        <ul>
+          <li>Feeling formulaic if followed too rigidly</li>
+          <li>Pacing sags in the middle trials</li>
+          <li>Overpowered mentor figures</li>
+          <li>Weak "return" if rushed</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="prompt-section">
+      <h3>Writer's Prompt to Try</h3>
+      <div class="prompt-card">
+        Your hero lives in a world where one ordinary rule has been reversed. Write the scene where they first hear their Call to Adventure — and make them refuse it for a reason the reader will respect.
+      </div>
+    </div>
+  </div>
+
+  <!-- 2. SAVE THE CAT -->
+  <div class="framework" id="f1">
+    <div class="framework-header">
+      <div class="framework-number">02</div>
+      <div>
+        <div class="framework-title">Save the Cat</div>
+        <div class="framework-subtitle">Beat-by-beat story architecture</div>
+        <div class="framework-origin">Blake Snyder · Originally for screenwriting, now widely used in fiction</div>
+      </div>
+    </div>
+
+    <div class="diagram">
+      <div class="diagram-node">Opening Image</div><div class="diagram-arrow">→</div>
+      <div class="diagram-node">Theme Stated</div><div class="diagram-arrow">→</div>
+      <div class="diagram-node">Catalyst</div><div class="diagram-arrow">→</div>
+      <div class="diagram-node">B Story</div><div class="diagram-arrow">→</div>
+      <div class="diagram-node">Dark Night</div><div class="diagram-arrow">→</div>
+      <div class="diagram-node">Finale</div><div class="diagram-arrow">→</div>
+      <div class="diagram-node">Final Image</div>
+    </div>
+
+    <div class="structure">
+      <h3>Click any beat to reveal its function</h3>
+      <div class="steps">
+        <div class="step" onclick="toggle(this)">
+          <div class="step-num">1</div>
+          <div>
+            <div class="step-label">Opening Image</div>
+            <div class="step-desc">A single image that captures the hero's world and emotional state before the story begins.</div>
+            <div class="step-example">A woman sits alone at a banquet table set for twenty. The candles burn low. No one came.</div>
+          </div>
+        </div>
+        <div class="step" onclick="toggle(this)">
+          <div class="step-num">2</div>
+          <div>
+            <div class="step-label">Theme Stated</div>
+            <div class="step-desc">Someone (rarely the hero) speaks the theme aloud — casually, early, almost throwaway.</div>
+            <div class="step-example">"The worst prison is the one you build for yourself," her sister says. The hero dismisses it.</div>
+          </div>
+        </div>
+        <div class="step" onclick="toggle(this)">
+          <div class="step-num">3</div>
+          <div>
+            <div class="step-label">Catalyst / Inciting Incident</div>
+            <div class="step-desc">The event that kicks the story into motion. Life will never be the same after this.</div>
+            <div class="step-example">A letter arrives: the estate she's been managing for others is legally hers — if she claims it.</div>
+          </div>
+        </div>
+        <div class="step" onclick="toggle(this)">
+          <div class="step-num">4</div>
+          <div>
+            <div class="step-label">Break into Two</div>
+            <div class="step-desc">The hero makes an active choice. They step into the upside-down world of Act 2.</div>
+            <div class="step-example">She boards the train. She's going to claim what's hers — for the first time in her life.</div>
+          </div>
+        </div>
+        <div class="step" onclick="toggle(this)">
+          <div class="step-num">5</div>
+          <div>
+            <div class="step-label">B Story (Heart of the Story)</div>
+            <div class="step-desc">A secondary plot — often a relationship — that carries the thematic weight of the story.</div>
+            <div class="step-example">She meets the estate's caretaker, who asks nothing of her. This unsettles her completely.</div>
+          </div>
+        </div>
+        <div class="step" onclick="toggle(this)">
+          <div class="step-num">6</div>
+          <div>
+            <div class="step-label">Dark Night of the Soul</div>
+            <div class="step-desc">All is lost. The hero must die (emotionally) before they can be reborn with new understanding.</div>
+            <div class="step-example">The estate burns. The claim is contested. The caretaker disappears. She has nothing and no one.</div>
+          </div>
+        </div>
+        <div class="step" onclick="toggle(this)">
+          <div class="step-num">7</div>
+          <div>
+            <div class="step-label">Break into Three</div>
+            <div class="step-desc">The hero synthesizes A story and B story to find the answer — and acts on the theme.</div>
+            <div class="step-example">She realizes the estate was never the point. She walks back to the caretaker's cottage.</div>
+          </div>
+        </div>
+        <div class="step" onclick="toggle(this)">
+          <div class="step-num">8</div>
+          <div>
+            <div class="step-label">Final Image</div>
+            <div class="step-desc">Mirror of the Opening Image — but everything has changed. Shows the transformation.</div>
+            <div class="step-example">She sits at a small table. Two plates. A candle. Someone knocks. She smiles and opens the door.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="two-col">
+      <div class="box green">
+        <h4>Best For</h4>
+        <ul>
+          <li>Plot-driven commercial fiction</li>
+          <li>Thematic precision and clarity</li>
+          <li>Genre fiction (thriller, romance)</li>
+          <li>Writers who want a scaffold</li>
+        </ul>
+      </div>
+      <div class="box red">
+        <h4>Watch Out For</h4>
+        <ul>
+          <li>Over-mechanizing emotional beats</li>
+          <li>Theme Stated feeling too obvious</li>
+          <li>Rigid page-count thinking</li>
+          <li>Neglecting the B Story's depth</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="prompt-section">
+      <h3>Writer's Prompt to Try</h3>
+      <div class="prompt-card">
+        Write your Opening Image and Final Image first — as a pair. They should be mirrors. Then ask: what transformation would take a character from one to the other?
+      </div>
+    </div>
+  </div>
+
+  <!-- 3. STORY CIRCLE -->
+  <div class="framework" id="f2">
+    <div class="framework-header">
+      <div class="framework-number">03</div>
+      <div>
+        <div class="framework-title">Dan Harmon's Story Circle</div>
+        <div class="framework-subtitle">The need-driven loop</div>
+        <div class="framework-origin">Dan Harmon (Community, Rick & Morty) · Distilled from Campbell · Ideal for episodic or cyclical stories</div>
+      </div>
+    </div>
+
+    <div class="diagram">
+      <div class="diagram-node">You (comfort)</div><div class="diagram-arrow">→</div>
+      <div class="diagram-node">Need</div><div class="diagram-arrow">→</div>
+      <div class="diagram-node">Go</div><div class="diagram-arrow">→</div>
+      <div class="diagram-node">Search</div><div class="diagram-arrow">→</div>
+      <div class="diagram-node">Find</div><div class="diagram-arrow">→</div>
+      <div class="diagram-node">Take</div><div class="diagram-arrow">→</div>
+      <div class="diagram-node">Return</div><div class="diagram-arrow">→</div>
+      <div class="diagram-node">Changed</div>
+    </div>
+
+    <div class="structure">
+      <h3>Eight points on the circle — click to expand</h3>
+      <div class="steps">
+        <div class="step" onclick="toggle(this)">
+          <div class="step-num">1</div>
+          <div>
+            <div class="step-label">You — A character in a zone of comfort</div>
+            <div class="step-desc">Establish who this person is and what their normal feels like.</div>
+            <div class="step-example">A detective who hasn't taken a case in two years. She drinks tea and reads. She's fine. (She's not fine.)</div>
+          </div>
+        </div>
+        <div class="step" onclick="toggle(this)">
+          <div class="step-num">2</div>
+          <div>
+            <div class="step-label">Need — But they want something</div>
+            <div class="step-desc">The want is conscious; the need (what they truly lack) is often hidden, even from them.</div>
+            <div class="step-example">She says she wants justice. She needs to believe people can be saved — including herself.</div>
+          </div>
+        </div>
+        <div class="step" onclick="toggle(this)">
+          <div class="step-num">3</div>
+          <div>
+            <div class="step-label">Go — Enter unfamiliar situation</div>
+            <div class="step-desc">They cross a threshold. Something forces them out of comfort.</div>
+            <div class="step-example">A teenage boy knocks on her door. His mother has vanished. The case is too familiar to refuse.</div>
+          </div>
+        </div>
+        <div class="step" onclick="toggle(this)">
+          <div class="step-num">4</div>
+          <div>
+            <div class="step-label">Search — Adapt to new situation</div>
+            <div class="step-desc">The character tries their old tools in a new environment. Some work. Some fail.</div>
+            <div class="step-example">She calls old contacts, runs old methods — but this case has a logic she doesn't understand yet.</div>
+          </div>
+        </div>
+        <div class="step" onclick="toggle(this)">
+          <div class="step-num">5</div>
+          <div>
+            <div class="step-label">Find — Get what they wanted</div>
+            <div class="step-desc">The surface goal is achieved — but at the midpoint, the real cost becomes visible.</div>
+            <div class="step-example">She finds the mother. But the mother chose to disappear — to escape the life the boy doesn't know about.</div>
+          </div>
+        </div>
+        <div class="step" onclick="toggle(this)">
+          <div class="step-num">6</div>
+          <div>
+            <div class="step-label">Take — Pay a heavy price</div>
+            <div class="step-desc">Getting what they wanted costs something real. This is the story's lowest point.</div>
+            <div class="step-example">To protect the boy, she has to lie to him. She has to become the thing she hates most.</div>
+          </div>
+        </div>
+        <div class="step" onclick="toggle(this)">
+          <div class="step-num">7</div>
+          <div>
+            <div class="step-label">Return — Back to familiar situation</div>
+            <div class="step-desc">The character returns — but the world looks different through changed eyes.</div>
+            <div class="step-example">She's back in her apartment. Tea. Books. The boy sends a postcard. She puts it on the wall.</div>
+          </div>
+        </div>
+        <div class="step" onclick="toggle(this)">
+          <div class="step-num">8</div>
+          <div>
+            <div class="step-label">Changed — Having changed</div>
+            <div class="step-desc">The character is subtly or profoundly different. The need has been met — or exposed.</div>
+            <div class="step-example">She opens her case files. She picks up the phone. She takes the next one. That's enough.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="two-col">
+      <div class="box green">
+        <h4>Best For</h4>
+        <ul>
+          <li>Character-driven literary fiction</li>
+          <li>Short stories and novellas</li>
+          <li>Series with recurring characters</li>
+          <li>Understanding Want vs. Need</li>
+        </ul>
+      </div>
+      <div class="box red">
+        <h4>Watch Out For</h4>
+        <ul>
+          <li>Flattening into a checklist</li>
+          <li>Forgetting the change must earn itself</li>
+          <li>Overusing for every subplot</li>
+          <li>Too neat a circle in messy stories</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="prompt-section">
+      <h3>Writer's Prompt to Try</h3>
+      <div class="prompt-card">
+        Write out your character's Want in one sentence and their Need in one sentence — and make them contradict each other. Then build the story from that contradiction.
+      </div>
+    </div>
+  </div>
+
+  <!-- 4. THREE ACT -->
+  <div class="framework" id="f3">
+    <div class="framework-header">
+      <div class="framework-number">04</div>
+      <div>
+        <div class="framework-title">Three-Act Structure</div>
+        <div class="framework-subtitle">The classical spine</div>
+        <div class="framework-origin">Aristotle's Poetics · The bedrock of Western narrative · Works at any length</div>
+      </div>
+    </div>
+
+    <div class="diagram">
+      <div class="diagram-node">Setup (25%)</div><div class="diagram-arrow">→</div>
+      <div class="diagram-node">Confrontation (50%)</div><div class="diagram-arrow">→</div>
+      <div class="diagram-node">Resolution (25%)</div>
+    </div>
+
+    <div class="structure">
+      <h3>The three acts and their key turning points</h3>
+      <div class="steps">
+        <div class="step" onclick="toggle(this)">
+          <div class="step-num">I</div>
+          <div>
+            <div class="step-label">Act One — Setup</div>
+            <div class="step-desc">Introduce world, character, and stakes. End with a turning point that launches Act 2.</div>
+            <div class="step-example">We meet a Victorian scientist who believes she can communicate with the dead. Her patron threatens to withdraw funding unless she produces results — tonight.</div>
+          </div>
+        </div>
+        <div class="step" onclick="toggle(this)">
+          <div class="step-num">→</div>
+          <div>
+            <div class="step-label">Turning Point 1 — Inciting Incident</div>
+            <div class="step-desc">The point of no return. The protagonist is locked into the conflict.</div>
+            <div class="step-example">During the séance, something actually answers. It knows things no living person could know.</div>
+          </div>
+        </div>
+        <div class="step" onclick="toggle(this)">
+          <div class="step-num">II</div>
+          <div>
+            <div class="step-label">Act Two — Confrontation</div>
+            <div class="step-desc">The protagonist pursues their goal, faces escalating obstacles, and reaches a midpoint shift.</div>
+            <div class="step-example">She investigates. The entity guides her toward a murder — one that happened fifty years ago. The trail leads to her own family.</div>
+          </div>
+        </div>
+        <div class="step" onclick="toggle(this)">
+          <div class="step-num">→</div>
+          <div>
+            <div class="step-label">Midpoint — False Peak or False Collapse</div>
+            <div class="step-desc">Things seem won (or lost) at the midpoint — but the stakes deepen and the real conflict emerges.</div>
+            <div class="step-example">She uncovers the truth of the murder — but realizes the entity has been guiding her toward a revelation she may not survive.</div>
+          </div>
+        </div>
+        <div class="step" onclick="toggle(this)">
+          <div class="step-num">→</div>
+          <div>
+            <div class="step-label">Turning Point 2 — Crisis / Dark Night</div>
+            <div class="step-desc">All seems lost. The protagonist must make their most difficult choice — with the highest stakes.</div>
+            <div class="step-example">The entity demands payment for its help. The price is her scientific reputation — the one thing she has left.</div>
+          </div>
+        </div>
+        <div class="step" onclick="toggle(this)">
+          <div class="step-num">III</div>
+          <div>
+            <div class="step-label">Act Three — Resolution</div>
+            <div class="step-desc">The protagonist takes decisive action. The conflict resolves — with or without victory. The world is changed.</div>
+            <div class="step-example">She publishes the truth. The world calls her a fraud. The family is exonerated. She lights a candle and waits.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="two-col">
+      <div class="box green">
+        <h4>Best For</h4>
+        <ul>
+          <li>Any genre, any length</li>
+          <li>First-time story architects</li>
+          <li>Diagnosing pacing problems</li>
+          <li>Subplots and nested stories</li>
+        </ul>
+      </div>
+      <div class="box red">
+        <h4>Watch Out For</h4>
+        <ul>
+          <li>Saggy middles (Act 2 is hardest)</li>
+          <li>Predictable turning points</li>
+          <li>Resolution that doesn't earn itself</li>
+          <li>Forgetting the midpoint shift</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="prompt-section">
+      <h3>Writer's Prompt to Try</h3>
+      <div class="prompt-card">
+        Write your Act 2 Midpoint first. What does your protagonist think they've solved — and what does the reader sense they haven't? Build Acts 1 and 3 outward from that pivot.
+      </div>
+    </div>
+  </div>
+
+  <!-- 5. FICHTEAN CURVE -->
+  <div class="framework" id="f4">
+    <div class="framework-header">
+      <div class="framework-number">05</div>
+      <div>
+        <div class="framework-title">The Fichtean Curve</div>
+        <div class="framework-subtitle">Crisis-first, tension-always</div>
+        <div class="framework-origin">Named for writer Janet Burroway · Best for literary and high-stakes genre fiction</div>
+      </div>
+    </div>
+
+    <div class="diagram">
+      <div class="diagram-node">In medias res opening</div><div class="diagram-arrow">→</div>
+      <div class="diagram-node">Rising Crisis 1</div><div class="diagram-arrow">→</div>
+      <div class="diagram-node">Rising Crisis 2</div><div class="diagram-arrow">→</div>
+      <div class="diagram-node">Rising Crisis 3</div><div class="diagram-arrow">→</div>
+      <div class="diagram-node">Climax</div><div class="diagram-arrow">→</div>
+      <div class="diagram-node">Brief Falling Action</div>
+    </div>
+
+    <div class="structure">
+      <h3>The principle: no setup, only escalation</h3>
+      <div class="steps">
+        <div class="step" onclick="toggle(this)">
+          <div class="step-num">↑</div>
+          <div>
+            <div class="step-label">Begin in Crisis</div>
+            <div class="step-desc">Skip the setup. Open in the middle of action or conflict. Context is revealed through crisis, not exposition.</div>
+            <div class="step-example">"The car had been burning for three minutes before anyone called for help. Marlowe watched from the hill and wondered if it was already too late to pretend she hadn't seen it happen."</div>
+          </div>
+        </div>
+        <div class="step" onclick="toggle(this)">
+          <div class="step-num">↑</div>
+          <div>
+            <div class="step-label">Escalating Mini-Crises</div>
+            <div class="step-desc">A series of rising complications — each one harder than the last. Brief respite between, but never full resolution.</div>
+            <div class="step-example">She investigates and is warned off. She digs deeper and finds a witness. The witness disappears. Her editor spikes the story. Her apartment is searched.</div>
+          </div>
+        </div>
+        <div class="step" onclick="toggle(this)">
+          <div class="step-num">↑</div>
+          <div>
+            <div class="step-label">The Major Climax</div>
+            <div class="step-desc">The highest, most intense crisis — where the protagonist must make the defining choice.</div>
+            <div class="step-example">She's given a choice: publish and lose everything, or stay silent and live safely. She types the headline.</div>
+          </div>
+        </div>
+        <div class="step" onclick="toggle(this)">
+          <div class="step-num">↓</div>
+          <div>
+            <div class="step-label">Brief, Earned Denouement</div>
+            <div class="step-desc">Short — just long enough to show the consequence. The Fichtean Curve resists lingering resolutions.</div>
+            <div class="step-example">Three sentences. She hits send. She closes the laptop. Outside, the city keeps moving, indifferent and alive.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="two-col">
+      <div class="box green">
+        <h4>Best For</h4>
+        <ul>
+          <li>Literary short fiction</li>
+          <li>Thrillers and suspense novels</li>
+          <li>Impatient, confident readers</li>
+          <li>High-stakes character studies</li>
+        </ul>
+      </div>
+      <div class="box red">
+        <h4>Watch Out For</h4>
+        <ul>
+          <li>Reader disorientation if too little grounding</li>
+          <li>Crises that don't escalate meaningfully</li>
+          <li>Exhausting pacing without earned rest</li>
+          <li>Climax that doesn't deliver on the tension</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="prompt-section">
+      <h3>Writer's Prompt to Try</h3>
+      <div class="prompt-card">
+        Write your story's opening line as though the reader already knows the character. Drop them into tension. Then ask: what three crises will escalate from this moment, each one stripping something away?
+      </div>
+    </div>
+  </div>
+
+  <!-- 6. IN MEDIAS RES / NONLINEAR -->
+  <div class="framework" id="f5">
+    <div class="framework-header">
+      <div class="framework-number">06</div>
+      <div>
+        <div class="framework-title">Nonlinear / In Medias Res</div>
+        <div class="framework-subtitle">Time as a narrative tool</div>
+        <div class="framework-origin">Latin: "into the middle of things" · Homer's Iliad · Used by Toni Morrison, Kazuo Ishiguro, Jennifer Egan</div>
+      </div>
+    </div>
+
+    <div class="diagram">
+      <div class="diagram-node">Present Crisis</div><div class="diagram-arrow">↔</div>
+      <div class="diagram-node">Past Revelation</div><div class="diagram-arrow">↔</div>
+      <div class="diagram-node">Future Consequence</div><div class="diagram-arrow">↔</div>
+      <div class="diagram-node">Emotional Truth</div>
+    </div>
+
+    <div class="structure">
+      <h3>Key nonlinear techniques — click to explore</h3>
+      <div class="steps">
+        <div class="step" onclick="toggle(this)">
+          <div class="step-num">◆</div>
+          <div>
+            <div class="step-label">In Medias Res Opening</div>
+            <div class="step-desc">Begin at a dramatic moment, then move backward to show how we got here.</div>
+            <div class="step-example">Open: a character is being arrested. Chapter Two: six months earlier, a letter arrives. The reader wants to know the gap.</div>
+          </div>
+        </div>
+        <div class="step" onclick="toggle(this)">
+          <div class="step-num">◆</div>
+          <div>
+            <div class="step-label">Dual Timeline</div>
+            <div class="step-desc">Two timelines — past and present — that speak to each other. Each reveals what the other hides.</div>
+            <div class="step-example">Present: a woman clears out her mother's house. Past: the same house, the same two women, thirty years ago. Each chapter adds a layer.</div>
+          </div>
+        </div>
+        <div class="step" onclick="toggle(this)">
+          <div class="step-num">◆</div>
+          <div>
+            <div class="step-label">Reverse Chronology</div>
+            <div class="step-desc">Begin at the end, move backward. Each scene recontextualizes the last. Harold Pinter's Betrayal, Martin Amis's Time's Arrow.</div>
+            <div class="step-example">A marriage dissolution in chapter one becomes, in chapter twelve, the innocent moment of first meeting. The reader knows what they can't unknow.</div>
+          </div>
+        </div>
+        <div class="step" onclick="toggle(this)">
+          <div class="step-num">◆</div>
+          <div>
+            <div class="step-label">Fragmented / Mosaic Structure</div>
+            <div class="step-desc">Scenes, vignettes, or perspectives arranged by thematic resonance rather than chronology. Jennifer Egan's A Visit from the Goon Squad.</div>
+            <div class="step-example">Twelve voices, twelve moments, different decades. The reader assembles the picture. What they assemble is part of the meaning.</div>
+          </div>
+        </div>
+        <div class="step" onclick="toggle(this)">
+          <div class="step-num">◆</div>
+          <div>
+            <div class="step-label">The Rule: Earn the Disorientation</div>
+            <div class="step-desc">Nonlinear structure must serve the emotional or thematic argument of the story — not just create mystique.</div>
+            <div class="step-example">Ask: why does THIS story need to be told out of order? What does withholding or reordering time reveal that linear structure cannot?</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="two-col">
+      <div class="box green">
+        <h4>Best For</h4>
+        <ul>
+          <li>Literary and experimental fiction</li>
+          <li>Memory, trauma, identity themes</li>
+          <li>Stories where truth is constructed</li>
+          <li>Unreliable narrators</li>
+        </ul>
+      </div>
+      <div class="box red">
+        <h4>Watch Out For</h4>
+        <ul>
+          <li>Confusion masking as complexity</li>
+          <li>Timelines that don't earn each other</li>
+          <li>Using nonlinearity as a crutch for weak plot</li>
+          <li>Losing the reader's emotional thread</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="prompt-section">
+      <h3>Writer's Prompt to Try</h3>
+      <div class="prompt-card">
+        Take a story you know well — or one you're drafting — and ask: what if the reader knew the ending from page one? How does that change every scene before it? Write the opening with the ending already given.
+      </div>
+    </div>
+  </div>
+
+  <p class="note">Click any stage or beat above to reveal an illustrative example &nbsp;·&nbsp; Each framework works best when broken with intention</p>
+
+</div>
+
+<script>
+  function show(index, btn) {
+    document.querySelectorAll('.framework').forEach(f => f.classList.remove('visible'));
+    document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+    document.getElementById('f' + index).classList.add('visible');
+    btn.classList.add('active');
+    // collapse all steps
+    document.querySelectorAll('.step').forEach(s => s.classList.remove('expanded'));
+  }
+
+  function toggle(step) {
+    step.classList.toggle('expanded');
+  }
+</script>
+
+</body>
+</html>
